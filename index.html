@@ -16,12 +16,36 @@
 </head>
 <body>
   <header>
-    <h1>Code Journal</h1>
+    <h2>Code Journal</h2>
   </header>
   <main>
     <div class="container">
       <div data-view="entry-form">
+        <form action="">
+          <h1>New Entry</h1>
 
+          <img src="images/placeholder-image-square.jpg" alt="Placeholder image" class="img-preview">
+
+          <label for="entry-title">
+            <h3 class="entry-subheading">Title</h3>
+          </label>
+          <input type="text" name="entry-title" id="entry-title">
+
+          <label for="entry-url">
+            <h3 class="entry-subheading">Photo URL</h3>
+          </label>
+          <input type="url" name="entry-url" id="entry-url">
+
+          <label for="entry-notes">
+            <h3 class="entry-subheading">Notes</h3>
+          </label>
+          <textarea name="entry-notes" id="entry-notes" cols="30" rows="10"></textarea>
+
+          <div class="save-wrap">
+            <button class="save-button">Save</button>
+          </div>
+
+        </form>
       </div>
     </div>
   </main>
