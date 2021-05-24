@@ -13,36 +13,69 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Proza+Libre:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap"
+    rel="stylesheet">
 </head>
 <body>
   <header>
-    <h2>Code Journal</h2>
+    <div class="container">
+      <div class="row">
+        <div class="col-full">
+          <h2 class="header-text">Code Journal</h2>
+        </div>
+      </div>
+    </div>
   </header>
+
   <main>
     <div class="container">
       <div data-view="entry-form">
         <form action="">
-          <h1>New Entry</h1>
+          <!-- Heading -->
+          <div class="row">
+            <div class="column-full">
+              <h1 class="entry-heading">New Entry</h1>
+            </div>
+          </div>
 
-          <img src="images/placeholder-image-square.jpg" alt="Placeholder image" class="img-preview">
+          <!-- Image Preview -->
+          <div class="row">
+            <div class="column-half">
+              <img src="images/placeholder-image-square.jpg" alt="Placeholder image" class="max-width rounded img-preview">
+            </div>
 
-          <label for="entry-title">
-            <h3 class="entry-subheading">Title</h3>
-          </label>
-          <input type="text" name="entry-title" id="entry-title" required>
+            <!-- Title -->
+            <div class="column-half">
+              <label for="entry-title">
+                <h3 class="entry-subheading">Title</h3>
+              </label>
+              <input type="text" name="entry-title" id="entry-title" class="text-box max-width rounded" required>
 
-          <label for="entry-url">
-            <h3 class="entry-subheading">Photo URL</h3>
-          </label>
-          <input type="url" name="entry-url" id="entry-url" required>
+              <!-- URL -->
+              <label for="entry-url">
+                <h3 class="entry-subheading">Photo URL</h3>
+              </label>
+              <input type="url" name="entry-url" id="entry-url" class="text-box max-width rounded" required>
+            </div>
+          </div>
 
-          <label for="entry-notes">
-            <h3 class="entry-subheading">Notes</h3>
-          </label>
-          <textarea name="entry-notes" id="entry-notes" cols="30" rows="10" required></textarea>
+          <!-- Notes -->
+          <div class="row">
+            <div class="column-full">
+              <label for="entry-notes">
+                <h3 class="entry-subheading">Notes</h3>
+              </label>
+              <textarea name="entry-notes" id="entry-notes" cols="30" rows="6" class="text-box max-width rounded" required></textarea>
+            </div>
+          </div>
 
-          <div class="save-wrap">
-            <button class="save-button">Save</button>
+          <!-- Save Button -->
+          <div class="row">
+            <div class="column-full save-wrap">
+              <button class="save-button rounded">Save</button>
+            </div>
           </div>
 
         </form>

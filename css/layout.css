@@ -32,3 +32,11 @@
     width: 50%;
   }
 }
+
+.max-width {
+  width: 100%;
+}
+
+.rounded {
+  border-radius: 4px;
+}
