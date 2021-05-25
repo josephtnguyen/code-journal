@@ -35,6 +35,4 @@ function handleSave(event) {
   $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
 
   $newEntry.reset();
-
-  console.log('entries:', data.entries);
 }
