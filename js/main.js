@@ -28,8 +28,11 @@ function handleSave(event) {
   var entry = {
     title: $title.value,
     url: $url.value,
-    notes: $notes.value
+    notes: $notes.value,
+    id: data.nextEntryId
   };
+
+  data.nextEntryId++;
 
   $newEntry.reset();
 }
