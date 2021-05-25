@@ -33,6 +33,7 @@ function handleSave(event) {
   };
 
   data.nextEntryId++;
+  data.entries.unshift(entry);
 
   $newEntry.reset();
 }
