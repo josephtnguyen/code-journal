@@ -3,19 +3,17 @@
 var $newEntry = document.querySelector('.entry-form');
 var $imgPreview = document.querySelector('.img-preview');
 var $photoUrl = document.querySelector('.photo-url');
-var $saveButton = document.querySelector('.save-button');
 
 $photoUrl.addEventListener('input', handleUrl);
+$imgPreview.addEventListener('error', handleImgError);
 $newEntry.addEventListener('submit', handleSave);
 
 function handleUrl(event) {
   $imgPreview.setAttribute('src', event.target.value);
+}
 
-  // if (event.target.value is valid) {
-  //   $imgPreview.setAttribute('src', event.target.value);
-  // } else {
-  //   $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
-  // }
+function handleImgError(event) {
+  $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
 }
 
 function handleSave(event) {
