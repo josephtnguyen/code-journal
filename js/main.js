@@ -1,17 +1,16 @@
 /* global data */
 /* exported data */
-var $photoUrl = document.querySelector('.photo-url');
 var $newEntry = document.querySelector('.entry-form');
+var $imgPreview = document.querySelector('.img-preview');
+var $photoUrl = document.querySelector('.photo-url');
 var $saveButton = document.querySelector('.save-button');
 
 $photoUrl.addEventListener('input', handleUrl);
 $newEntry.addEventListener('submit', handleSave);
 
 function handleUrl(event) {
-  var $imgPreview = document.querySelector('.img-preview');
-  console.log(event);
-
   $imgPreview.setAttribute('src', event.target.value);
+
   // if (event.target.value is valid) {
   //   $imgPreview.setAttribute('src', event.target.value);
   // } else {
@@ -34,6 +33,8 @@ function handleSave(event) {
 
   data.nextEntryId++;
   data.entries.unshift(entry);
+
+  $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
 
   $newEntry.reset();
 }
