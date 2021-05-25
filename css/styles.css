@@ -1,0 +1,70 @@
+* {
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  background-color: #F0F0F0;
+}
+
+header {
+  background-color: #562B81;
+  color: white;
+  padding: 1rem 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Proza Libre', sans-serif;
+  margin: 0 auto;
+}
+
+.header-text {
+  font-size: 1.25rem;
+  font-weight: normal;
+}
+
+.entry-heading {
+  font-size: 1.875rem;
+  margin: 1rem 0;
+}
+
+.entry-subheading {
+  font-size: 1rem;
+  margin: 1.5rem 0 .5rem;
+}
+
+.img-preview {
+  height: 25vh;
+  object-fit: cover;
+}
+
+.text-box {
+  font-size: 1rem;
+  border: 1px solid #B6B6B6;
+  padding: .5rem;
+}
+
+.text-box:focus {
+  outline-color: #562B81;
+}
+
+.save-wrap {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.save-button {
+  background-color: #562B81;
+  color: white;
+  text-transform: uppercase;
+  border-width: 0;
+  margin: 1rem 0;
+  padding: .25rem 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .img-preview {
+    height: 100%;
+  }
+}
