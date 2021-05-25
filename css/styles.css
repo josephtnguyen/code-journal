@@ -24,7 +24,7 @@ h3 {
   font-weight: normal;
 }
 
-.entry-heading {
+.page-heading {
   font-size: 1.875rem;
   margin: 1rem 0;
 }
@@ -54,13 +54,21 @@ h3 {
   justify-content: flex-end;
 }
 
-.save-button {
+button {
   background-color: #562B81;
   color: white;
   text-transform: uppercase;
   border-width: 0;
+}
+
+.save-button {
   margin: 1rem 0;
   padding: .25rem 1rem;
+}
+
+.new-button {
+  margin: auto 0;
+  padding: .25rem .5rem;
 }
 
 @media screen and (min-width: 768px) {

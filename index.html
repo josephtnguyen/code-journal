@@ -31,12 +31,13 @@
 
   <main>
     <div class="container">
-      <div data-view="entry-form">
+      <!-- New Entry -->
+      <div data-view="entry-form" class="hidden">
         <form action="" class="entry-form">
           <!-- Heading -->
           <div class="row">
             <div class="column-full">
-              <h1 class="entry-heading">New Entry</h1>
+              <h1 class="page-heading">New Entry</h1>
             </div>
           </div>
 
@@ -82,6 +83,18 @@
           </div>
 
         </form>
+      </div>
+
+      <!-- Entries -->
+      <div data-view="entries">
+        <div class="row">
+          <div class="column-full">
+            <div class="justify-away">
+              <h1 class="page-heading">Entries</h1>
+              <button class="new-button rounded">New</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </main>
