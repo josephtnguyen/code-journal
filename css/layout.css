@@ -26,6 +26,11 @@
   border-radius: 4px;
 }
 
+.no-bullets {
+  list-style: none;
+  padding: 0;
+}
+
 .justify-away {
   display: flex;
   justify-content: space-between;

@@ -52,26 +52,26 @@
 
             <!-- Title -->
             <div class="column-half">
-              <label for="entry-title">
-                <h3 class="entry-subheading">Title</h3>
+              <label for="new-title">
+                <h3 class="new-subheading">Title</h3>
               </label>
-              <input type="text" name="entry-title" id="entry-title" class="text-box max-width rounded" required>
+              <input type="text" name="new-title" id="new-title" class="text-box max-width rounded" required>
 
               <!-- URL -->
-              <label for="entry-url">
-                <h3 class="entry-subheading">Photo URL</h3>
+              <label for="new-url">
+                <h3 class="new-subheading">Photo URL</h3>
               </label>
-              <input type="url" name="entry-url" id="entry-url" class="text-box max-width rounded photo-url" required>
+              <input type="url" name="new-url" id="new-url" class="text-box max-width rounded photo-url" required>
             </div>
           </div>
 
           <!-- Notes -->
           <div class="row">
             <div class="column-full">
-              <label for="entry-notes">
-                <h3 class="entry-subheading">Notes</h3>
+              <label for="new-notes">
+                <h3 class="new-subheading">Notes</h3>
               </label>
-              <textarea name="entry-notes" id="entry-notes" cols="30" rows="6" class="text-box max-width rounded" required></textarea>
+              <textarea name="new-notes" id="new-notes" cols="30" rows="6" class="text-box max-width rounded" required></textarea>
             </div>
           </div>
 
@@ -96,8 +96,45 @@
           </div>
         </div>
 
-        <ul>
+        <ul class="entries-list">
+          <!-- Entry 2 -->
+          <li class="entries-list-item">
+            <div class="row">
+              <div class="column-half">
+                <img
+                src="https://miro.medium.com/max/2944/1*G0or3nXOtD3vVEvyEbCldQ.png"
+                alt="Ada Lovelace"
+                class="max-width rounded img-preview">
+              </div>
 
+              <div class="column-half">
+                <h2 class="entry-heading">Ada Lovelace</h2>
+                <p class="entry-par">
+                  Augusta Ada King, Countess of Lovelace was an English mathematician and writer, chiefly known for her work on Charles Babbage's proposed mechanical general-purpose computer, the Analytical Engine. <br>
+                  She was the first to recognize that the machine had applications beyond pure calculation, and to have published the first algorithm intended to be carried out by such a machine.
+                </p>
+              </div>
+            </div>
+          </li>
+
+          <!-- Entry 1 -->
+          <li class="entries-list-item">
+            <div class="row">
+              <div class="column-half">
+                <img src="https://venturebeat.com/wp-content/uploads/2018/01/javascript.jpg?fit=1800%2C1116&strip=all"
+                alt="JavaScript code"
+                class="max-width rounded img-preview">
+              </div>
+
+              <div class="column-half">
+                <h2 class="entry-heading">JavaScript</h2>
+                <p class="entry-par">
+                  JavaScript, often abbreviated as JS, is a programming language that conforms to the ECMAScript specification. <br>
+                  JavaScript is high-level, often just-in-time compiled, and multi-paradigm. It has curly-bracket syntax, dynamic typing, prototype-based object-orientation, and first-class functions.
+                </p>
+              </div>
+            </div>
+          </li>
         </ul>
       </div>
     </div>

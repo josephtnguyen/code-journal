@@ -4,6 +4,10 @@ var $newEntry = document.querySelector('.entry-form');
 var $imgPreview = document.querySelector('.img-preview');
 var $photoUrl = document.querySelector('.photo-url');
 
+var $title = document.querySelector('#new-title');
+var $url = document.querySelector('#new-url');
+var $notes = document.querySelector('#new-notes');
+
 $photoUrl.addEventListener('input', handleUrl);
 $imgPreview.addEventListener('error', handleImgError);
 $newEntry.addEventListener('submit', handleSave);
@@ -19,9 +23,6 @@ function handleImgError(event) {
 function handleSave(event) {
   event.preventDefault();
 
-  var $title = document.querySelector('#entry-title');
-  var $url = document.querySelector('#entry-url');
-  var $notes = document.querySelector('#entry-notes');
   var entry = {
     title: $title.value,
     url: $url.value,
