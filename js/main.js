@@ -88,6 +88,14 @@ function handleEdit(event) {
   }
 
   showPage('entry-form');
+
+  for (var i = 0; i < data.entries.length; i++) {
+    var $targetedLi = event.target.closest('.entries-list-item');
+    if (data.entries[i].id == $targetedLi.getAttribute('data-entry-id')) {
+      data.editing = data.entries[i];
+      break;
+    }
+  }
 }
 
 function showPage(page) {
