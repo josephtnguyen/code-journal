@@ -47,6 +47,8 @@ function handleSave(event) {
   $entriesDisplayed.insertBefore(journalEntry(entry), $entriesDisplayed.firstElementChild);
 
   $newEntry.reset();
+
+  showPage('entries');
 }
 
 function handleNew(event) {
