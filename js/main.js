@@ -96,6 +96,10 @@ function handleEdit(event) {
       break;
     }
   }
+
+  $newTitle.value = data.editing.title;
+  $newUrl.value = data.editing.url;
+  $newNotes.value = data.editing.notes;
 }
 
 function showPage(page) {
