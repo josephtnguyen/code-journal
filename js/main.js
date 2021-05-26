@@ -8,9 +8,16 @@ var $newTitle = document.querySelector('#new-title');
 var $newUrl = document.querySelector('#new-url');
 var $newNotes = document.querySelector('#new-notes');
 
+var $views = document.querySelectorAll('.view');
+var $newButton = document.querySelector('.new-button');
+var $entriesDisplayed = document.querySelector('.entries-list');
+
 $photoUrl.addEventListener('input', handleUrl);
 $imgPreview.addEventListener('error', handleImgError);
 $newEntry.addEventListener('submit', handleSave);
+
+$newButton.addEventListener('click', handleNew);
+document.addEventListener('DOMContentLoaded', handleDOMLoad);
 
 function handleUrl(event) {
   $imgPreview.setAttribute('src', event.target.value);
@@ -36,6 +43,29 @@ function handleSave(event) {
   $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
 
   $newEntry.reset();
+
+  showPage('entries');
+}
+
+function handleNew(event) {
+  showPage('entry-form');
+}
+
+function handleDOMLoad(event) {
+  console.log('it happened!');
+  for (var i = 0; i < data.entries.length; i++) {
+    $entriesDisplayed.appendChild(journalEntry(data.entries[i]));
+  }
+}
+
+function showPage(page) {
+  for (var i = 0; i < $views.length; i++) {
+    if ($views[i].getAttribute('data-view') === page) {
+      $views[i].classList.remove('hidden');
+    } else {
+      $views[i].classList.add('hidden');
+    }
+  }
 }
 
 function journalEntry(entry) {
@@ -68,20 +98,19 @@ function journalEntry(entry) {
   $image.className = 'max-width rounded img-preview';
   $imgCol.appendChild($image);
 
-  var $textCol = docoment.createElement('div');
+  var $textCol = document.createElement('div');
   $textCol.className = 'column-half';
   $row.appendChild($textCol);
 
   var $entryTitle = document.createElement('h2');
-  $title.className = 'entry-heading';
-  $title.textContent = entry.title;
-  $textCol.appendChild($title);
+  $entryTitle.className = 'entry-heading';
+  $entryTitle.textContent = entry.title;
+  $textCol.appendChild($entryTitle);
 
   var $entryNotes = document.createElement('p');
   $entryNotes.className = 'entry-par';
   $entryNotes.textContent = entry.notes;
   $textCol.appendChild($entryNotes);
 
-  console.log($li);
   return $li;
 }
