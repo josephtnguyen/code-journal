@@ -3,7 +3,6 @@
 var $newEntry = document.querySelector('.entry-form');
 var $imgPreview = document.querySelector('.img-preview');
 var $photoUrl = document.querySelector('.photo-url');
-
 var $newTitle = document.querySelector('#new-title');
 var $newUrl = document.querySelector('#new-url');
 var $newNotes = document.querySelector('#new-notes');
@@ -12,6 +11,7 @@ var $views = document.querySelectorAll('.view');
 var $newButton = document.querySelector('.new-button');
 var $entriesDisplayed = document.querySelector('.entries-list');
 var $navBar = document.querySelector('.nav-bar');
+var $noEntriesMessage = document.querySelector('.entries-none');
 
 $photoUrl.addEventListener('input', handleUrl);
 $imgPreview.addEventListener('error', handleImgError);
@@ -49,6 +49,7 @@ function handleSave(event) {
 
   $newEntry.reset();
 
+  $noEntriesMessage.classList.add('hidden');
   showPage('entries');
 }
 
@@ -61,6 +62,9 @@ function handleDOMLoad(event) {
   if (previousDataJSON) {
     data = JSON.parse(previousDataJSON);
     showPage(data.view);
+    if (data.entries.length !== 0) {
+      $noEntriesMessage.classList.add('hidden');
+    }
   }
 
   for (var i = 0; i < data.entries.length; i++) {
@@ -141,4 +145,23 @@ function journalEntry(entry) {
   $textCol.appendChild($entryNotes);
 
   return $li;
+}
+
+function resetPage() {
+  localStorage.clear();
+
+  data = {
+    view: 'entry-form',
+    entries: [],
+    editing: null,
+    nextEntryId: 1
+  };
+
+  for (var i = 3; i < $entriesDisplayed.childNodes.length; i) {
+    console.log('removed node:', $entriesDisplayed.childNodes[1]);
+    $entriesDisplayed.childNodes[1].remove();
+  }
+
+  $noEntriesMessage.classList.remove('hidden');
+
 }
