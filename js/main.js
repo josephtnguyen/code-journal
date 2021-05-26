@@ -48,11 +48,9 @@ function handleSave(event) {
     entry.id = data.editing.id;
 
     for (var i = 0; i < $entriesDisplayed.childNodes.length; i++) {
-      if ($entriesDisplayed.childNodes[i].getAttribute('data-entry-id')) {
-        if (entry.id == $entriesDisplayed.childNodes[i].getAttribute('data-entry-id')) {
-          var $targetedLi = $entriesDisplayed.childNodes[i];
-          break;
-        }
+      if (entry.id == $entriesDisplayed.childNodes[i].getAttribute('data-entry-id')) {
+        var $targetedLi = $entriesDisplayed.childNodes[i];
+        break;
       }
     }
     $targetedLi.replaceWith(journalEntry(entry));
