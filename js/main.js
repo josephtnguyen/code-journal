@@ -13,6 +13,8 @@ var $entriesDisplayed = document.querySelector('.entries-list');
 var $navBar = document.querySelector('.nav-bar');
 var $noEntriesMessage = document.querySelector('.entries-none');
 
+var $targetedLi = null;
+
 $photoUrl.addEventListener('input', handleUrl);
 $imgPreview.addEventListener('error', handleImgError);
 $newEntry.addEventListener('submit', handleSave);
@@ -37,6 +39,8 @@ function handleImgError(event) {
 function handleSave(event) {
   event.preventDefault();
 
+  $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
+
   var entry = {
     title: $newTitle.value,
     url: $newUrl.value,
@@ -44,12 +48,25 @@ function handleSave(event) {
     id: data.nextEntryId
   };
 
-  data.nextEntryId++;
-  data.entries.unshift(entry);
+  if (data.editing) {
+    entry.id = data.editing.id;
 
-  $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
+    $targetedLi.replaceWith(journalEntry(entry));
+    $targetedLi = null;
 
-  $entriesDisplayed.prepend(journalEntry(entry));
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].id === entry.id) {
+        data.entries[i] = entry;
+        break;
+      }
+    }
+    data.editing = null;
+  } else {
+    data.nextEntryId++;
+    data.entries.unshift(entry);
+
+    $entriesDisplayed.prepend(journalEntry(entry));
+  }
 
   $newEntry.reset();
 
@@ -90,7 +107,7 @@ function handleEdit(event) {
   showPage('entry-form');
 
   for (var i = 0; i < data.entries.length; i++) {
-    var $targetedLi = event.target.closest('.entries-list-item');
+    $targetedLi = event.target.closest('.entries-list-item');
     if (data.entries[i].id == $targetedLi.getAttribute('data-entry-id')) {
       data.editing = data.entries[i];
       break;
