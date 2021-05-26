@@ -99,10 +99,13 @@ function journalEntry(entry) {
   //     <div class="column-half">
   //       <img>
   //     </div>
-
+  //
   //     <div class="column-half">
+  //       <div class="entry-header">
   //         <h2 class="entry-heading">title</h2>
-  //         <p class="entry-par">notes</p>
+  //         <span class="fa edit-button"></span>
+  //       </div>
+  //       <p class="entry-par">notes</p>
   //     </div>
   //   </div>
   // </li>
@@ -127,10 +130,19 @@ function journalEntry(entry) {
   $textCol.className = 'column-half';
   $row.appendChild($textCol);
 
+  var $entryHeader = document.createElement('div');
+  $entryHeader.className = 'entry-header';
+  $textCol.appendChild($entryHeader);
+
   var $entryTitle = document.createElement('h2');
   $entryTitle.className = 'entry-heading';
   $entryTitle.textContent = entry.title;
-  $textCol.appendChild($entryTitle);
+  $entryHeader.appendChild($entryTitle);
+
+  var $editButton = document.createElement('span');
+  $editButton.className = 'fa edit-button';
+  $editButton.textContent = '\uf304';
+  $entryHeader.appendChild($editButton);
 
   var $entryNotes = document.createElement('p');
   $entryNotes.className = 'entry-par';
