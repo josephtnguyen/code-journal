@@ -21,6 +21,7 @@ $newButton.addEventListener('click', handleNew);
 document.addEventListener('DOMContentLoaded', handleDOMLoad);
 $navBar.addEventListener('click', handleNav);
 
+$entriesDisplayed.addEventListener('click', handleEdit);
 
 showPage(data.view);
 
@@ -43,26 +44,51 @@ function handleSave(event) {
     id: data.nextEntryId
   };
 
-  data.nextEntryId++;
-  data.entries.unshift(entry);
+  if (data.editing) {
+    entry.id = data.editing.id;
 
-  $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
+    for (var i = 0; i < $entriesDisplayed.childNodes.length; i++) {
+      if (entry.id == $entriesDisplayed.childNodes[i].getAttribute('data-entry-id')) {
+        var $targetedLi = $entriesDisplayed.childNodes[i];
+        break;
+      }
+    }
+    $targetedLi.replaceWith(journalEntry(entry));
 
-  $entriesDisplayed.prepend(journalEntry(entry));
+    for (i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].id === entry.id) {
+        data.entries[i] = entry;
+        break;
+      }
+    }
+  } else {
+    data.nextEntryId++;
+    data.entries.push(entry);
 
-  $newEntry.reset();
+    $entriesDisplayed.prepend(journalEntry(entry));
+  }
+
+  refreshNewEntry();
 
   $noEntriesMessage.classList.add('hidden');
   showPage('entries');
 }
 
 function handleNew(event) {
+  refreshNewEntry();
   showPage('entry-form');
 }
 
 function handleDOMLoad(event) {
   if (data.entries.length !== 0) {
     $noEntriesMessage.classList.add('hidden');
+  }
+
+  if (data.editing) {
+    $newTitle.value = data.editing.title;
+    $newUrl.value = data.editing.url;
+    $newNotes.value = data.editing.notes;
+    $imgPreview.setAttribute('src', $newUrl.value);
   }
 
   for (var i = 0; i < data.entries.length; i++) {
@@ -79,6 +105,27 @@ function handleNav(event) {
     event.preventDefault();
     showPage('entries');
   }
+}
+
+function handleEdit(event) {
+  if (!(event.target.matches('.edit-button'))) {
+    return;
+  }
+
+  showPage('entry-form');
+
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].id == event.target.closest('.entries-list-item').getAttribute('data-entry-id')) {
+      data.editing = data.entries[i];
+      break;
+    }
+  }
+
+  $newTitle.value = data.editing.title;
+  $newUrl.value = data.editing.url;
+  $newNotes.value = data.editing.notes;
+
+  $imgPreview.setAttribute('src', $newUrl.value);
 }
 
 function showPage(page) {
@@ -99,16 +146,20 @@ function journalEntry(entry) {
   //     <div class="column-half">
   //       <img>
   //     </div>
-
+  //
   //     <div class="column-half">
+  //       <div class="entry-header">
   //         <h2 class="entry-heading">title</h2>
-  //         <p class="entry-par">notes</p>
+  //         <span class="fa edit-button"></span>
+  //       </div>
+  //       <p class="entry-par">notes</p>
   //     </div>
   //   </div>
   // </li>
 
   var $li = document.createElement('li');
   $li.className = 'entries-list-item';
+  $li.setAttribute('data-entry-id', entry.id);
 
   var $row = document.createElement('div');
   $row.className = 'row';
@@ -127,10 +178,19 @@ function journalEntry(entry) {
   $textCol.className = 'column-half';
   $row.appendChild($textCol);
 
+  var $entryHeader = document.createElement('div');
+  $entryHeader.className = 'entry-header';
+  $textCol.appendChild($entryHeader);
+
   var $entryTitle = document.createElement('h2');
   $entryTitle.className = 'entry-heading';
   $entryTitle.textContent = entry.title;
-  $textCol.appendChild($entryTitle);
+  $entryHeader.appendChild($entryTitle);
+
+  var $editButton = document.createElement('span');
+  $editButton.className = 'fa edit-button';
+  $editButton.textContent = '\uf304';
+  $entryHeader.appendChild($editButton);
 
   var $entryNotes = document.createElement('p');
   $entryNotes.className = 'entry-par';
@@ -138,4 +198,10 @@ function journalEntry(entry) {
   $textCol.appendChild($entryNotes);
 
   return $li;
+}
+
+function refreshNewEntry() {
+  $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $newEntry.reset();
+  data.editing = null;
 }
