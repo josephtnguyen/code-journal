@@ -20,7 +20,10 @@ $newEntry.addEventListener('submit', handleSave);
 $newButton.addEventListener('click', handleNew);
 document.addEventListener('DOMContentLoaded', handleDOMLoad);
 $navBar.addEventListener('click', handleNav);
-window.addEventListener('beforeunload', handleClose);
+
+
+showPage(data.view);
+
 
 function handleUrl(event) {
   $imgPreview.setAttribute('src', event.target.value);
@@ -45,7 +48,7 @@ function handleSave(event) {
 
   $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
 
-  $entriesDisplayed.insertBefore(journalEntry(entry), $entriesDisplayed.firstElementChild);
+  $entriesDisplayed.prepend(journalEntry(entry));
 
   $newEntry.reset();
 
@@ -58,17 +61,12 @@ function handleNew(event) {
 }
 
 function handleDOMLoad(event) {
-  var previousDataJSON = localStorage.getItem('data-JSON');
-  if (previousDataJSON) {
-    data = JSON.parse(previousDataJSON);
-    showPage(data.view);
-    if (data.entries.length !== 0) {
-      $noEntriesMessage.classList.add('hidden');
-    }
+  if (data.entries.length !== 0) {
+    $noEntriesMessage.classList.add('hidden');
   }
 
   for (var i = 0; i < data.entries.length; i++) {
-    $entriesDisplayed.insertBefore(journalEntry(data.entries[i]), $entriesDisplayed.firstElementChild);
+    $entriesDisplayed.prepend(journalEntry(data.entries[i]));
   }
 }
 
@@ -81,11 +79,6 @@ function handleNav(event) {
     event.preventDefault();
     showPage('entries');
   }
-}
-
-function handleClose(event) {
-  var dataJSON = JSON.stringify(data);
-  localStorage.setItem('data-JSON', dataJSON);
 }
 
 function showPage(page) {
@@ -145,23 +138,4 @@ function journalEntry(entry) {
   $textCol.appendChild($entryNotes);
 
   return $li;
-}
-
-function resetPage() {
-  localStorage.clear();
-
-  data = {
-    view: 'entry-form',
-    entries: [],
-    editing: null,
-    nextEntryId: 1
-  };
-
-  for (var i = 3; i < $entriesDisplayed.childNodes.length; i) {
-    console.log('removed node:', $entriesDisplayed.childNodes[1]);
-    $entriesDisplayed.childNodes[1].remove();
-  }
-
-  $noEntriesMessage.classList.remove('hidden');
-
 }
