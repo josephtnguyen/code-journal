@@ -26,6 +26,16 @@
   border-radius: 4px;
 }
 
+.justify-away {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.center-text {
+  text-align: center;
+}
+
 @media screen and (min-width: 768px) {
   .container {
     max-width: 900px;

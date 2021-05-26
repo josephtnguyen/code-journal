@@ -22,8 +22,11 @@
   <header>
     <div class="container">
       <div class="row">
-        <div class="col-full">
-          <h2 class="header-text">Code Journal</h2>
+        <div class="column-full">
+          <h2 class="header-heading">Code Journal</h2>
+          <nav class="nav-bar">
+            <a href="">Entries</a>
+          </nav>
         </div>
       </div>
     </div>
@@ -31,12 +34,14 @@
 
   <main>
     <div class="container">
-      <div data-view="entry-form">
+
+      <!-- New Entry -->
+      <div data-view="entry-form" class="view hidden">
         <form action="" class="entry-form">
           <!-- Heading -->
           <div class="row">
             <div class="column-full">
-              <h1 class="entry-heading">New Entry</h1>
+              <h1 class="page-heading">New Entry</h1>
             </div>
           </div>
 
@@ -51,26 +56,26 @@
 
             <!-- Title -->
             <div class="column-half">
-              <label for="entry-title">
-                <h3 class="entry-subheading">Title</h3>
+              <label for="new-title">
+                <h3 class="new-subheading">Title</h3>
               </label>
-              <input type="text" name="entry-title" id="entry-title" class="text-box max-width rounded" required>
+              <input type="text" name="new-title" id="new-title" class="text-box max-width rounded" required>
 
               <!-- URL -->
-              <label for="entry-url">
-                <h3 class="entry-subheading">Photo URL</h3>
+              <label for="new-url">
+                <h3 class="new-subheading">Photo URL</h3>
               </label>
-              <input type="url" name="entry-url" id="entry-url" class="text-box max-width rounded photo-url" required>
+              <input type="url" name="new-url" id="new-url" class="text-box max-width rounded photo-url" required>
             </div>
           </div>
 
           <!-- Notes -->
           <div class="row">
             <div class="column-full">
-              <label for="entry-notes">
-                <h3 class="entry-subheading">Notes</h3>
+              <label for="new-notes">
+                <h3 class="new-subheading">Notes</h3>
               </label>
-              <textarea name="entry-notes" id="entry-notes" cols="30" rows="6" class="text-box max-width rounded" required></textarea>
+              <textarea name="new-notes" id="new-notes" cols="30" rows="6" class="text-box max-width rounded" required></textarea>
             </div>
           </div>
 
@@ -82,6 +87,29 @@
           </div>
 
         </form>
+      </div>
+
+      <!-- Entries -->
+      <div data-view="entries" class="view">
+
+        <!-- Heading -->
+        <div class="row">
+          <div class="column-full">
+            <div class="justify-away">
+              <h1 class="page-heading">Entries</h1>
+              <button class="new-button rounded">New</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- List of Entries -->
+        <ul class="entries-list">
+          <div class="row entries-none">
+            <div class="column-full center-text">
+              <p>No Entries have been recorded.</p>
+            </div>
+          </div>
+        </ul>
       </div>
     </div>
   </main>
