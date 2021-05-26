@@ -21,6 +21,7 @@ $newButton.addEventListener('click', handleNew);
 document.addEventListener('DOMContentLoaded', handleDOMLoad);
 $navBar.addEventListener('click', handleNav);
 
+$entriesDisplayed.addEventListener('click', handleEdit);
 
 showPage(data.view);
 
@@ -78,6 +79,12 @@ function handleNav(event) {
   if (event.target.textContent === 'Entries') {
     event.preventDefault();
     showPage('entries');
+  }
+}
+
+function handleEdit(event) {
+  if (!(event.target.matches('.edit-button'))) {
+    return;
   }
 }
 
