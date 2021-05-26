@@ -20,6 +20,7 @@ $newEntry.addEventListener('submit', handleSave);
 $newButton.addEventListener('click', handleNew);
 document.addEventListener('DOMContentLoaded', handleDOMLoad);
 $navBar.addEventListener('click', handleNav);
+window.addEventListener('beforeunload', handleClose);
 
 function handleUrl(event) {
   $imgPreview.setAttribute('src', event.target.value);
@@ -56,6 +57,12 @@ function handleNew(event) {
 }
 
 function handleDOMLoad(event) {
+  var previousDataJSON = localStorage.getItem('data-JSON');
+  if (previousDataJSON) {
+    data = JSON.parse(previousDataJSON);
+    showPage(data.view);
+  }
+
   for (var i = 0; i < data.entries.length; i++) {
     $entriesDisplayed.insertBefore(journalEntry(data.entries[i]), $entriesDisplayed.firstElementChild);
   }
@@ -72,7 +79,14 @@ function handleNav(event) {
   }
 }
 
+function handleClose(event) {
+  var dataJSON = JSON.stringify(data);
+  localStorage.setItem('data-JSON', dataJSON);
+}
+
 function showPage(page) {
+  data.view = page;
+
   for (var i = 0; i < $views.length; i++) {
     if ($views[i].getAttribute('data-view') === page) {
       $views[i].classList.remove('hidden');
