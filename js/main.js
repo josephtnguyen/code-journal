@@ -6,6 +6,8 @@ var $photoUrl = document.querySelector('.photo-url');
 var $newTitle = document.querySelector('#new-title');
 var $newUrl = document.querySelector('#new-url');
 var $newNotes = document.querySelector('#new-notes');
+var $newFooter = document.querySelector('.new-footer');
+var $deleteButton = document.querySelector('.delete-button');
 
 var $views = document.querySelectorAll('.view');
 var $newButton = document.querySelector('.new-button');
@@ -76,6 +78,10 @@ function handleSave(event) {
 
 function handleNew(event) {
   refreshNewEntry();
+
+  $newFooter.classList.remove('show-delete');
+  $deleteButton.classList.add('hidden');
+
   showPage('entry-form');
 }
 
@@ -89,6 +95,9 @@ function handleDOMLoad(event) {
     $newUrl.value = data.editing.url;
     $newNotes.value = data.editing.notes;
     $imgPreview.setAttribute('src', $newUrl.value);
+
+    $newFooter.classList.add('show-delete');
+    $deleteButton.classList.remove('hidden');
   }
 
   for (var i = 0; i < data.entries.length; i++) {
@@ -111,6 +120,9 @@ function handleEdit(event) {
   if (!(event.target.matches('.edit-button'))) {
     return;
   }
+
+  $newFooter.classList.add('show-delete');
+  $deleteButton.classList.remove('hidden');
 
   showPage('entry-form');
 

@@ -66,9 +66,13 @@ a:hover {
   outline-color: #562B81;
 }
 
-.save-wrap {
+.new-footer {
   display: flex;
   justify-content: flex-end;
+}
+
+.show-delete {
+  justify-content: space-between;
 }
 
 button {
@@ -76,6 +80,13 @@ button {
   color: white;
   text-transform: uppercase;
   border-width: 0;
+}
+
+.delete-button {
+  background-color: #F0F0F0;
+  color: #DC2626;
+  text-decoration: underline;
+  text-transform: none;
 }
 
 .save-button {
