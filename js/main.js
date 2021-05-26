@@ -112,6 +112,7 @@ function journalEntry(entry) {
 
   var $li = document.createElement('li');
   $li.className = 'entries-list-item';
+  $li.setAttribute('data-entry-id', entry.id);
 
   var $row = document.createElement('div');
   $row.className = 'row';
