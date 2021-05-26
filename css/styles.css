@@ -24,6 +24,10 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  text-decoration: underline;
+}
+
 .header-heading {
   display: inline;
   font-size: 1.25rem;

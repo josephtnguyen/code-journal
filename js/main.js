@@ -11,6 +11,7 @@ var $newNotes = document.querySelector('#new-notes');
 var $views = document.querySelectorAll('.view');
 var $newButton = document.querySelector('.new-button');
 var $entriesDisplayed = document.querySelector('.entries-list');
+var $navBar = document.querySelector('.nav-bar');
 
 $photoUrl.addEventListener('input', handleUrl);
 $imgPreview.addEventListener('error', handleImgError);
@@ -18,6 +19,7 @@ $newEntry.addEventListener('submit', handleSave);
 
 $newButton.addEventListener('click', handleNew);
 document.addEventListener('DOMContentLoaded', handleDOMLoad);
+$navBar.addEventListener('click', handleNav);
 
 function handleUrl(event) {
   $imgPreview.setAttribute('src', event.target.value);
@@ -52,9 +54,19 @@ function handleNew(event) {
 }
 
 function handleDOMLoad(event) {
-  console.log('it happened!');
   for (var i = 0; i < data.entries.length; i++) {
     $entriesDisplayed.appendChild(journalEntry(data.entries[i]));
+  }
+}
+
+function handleNav(event) {
+  if (!(event.target.matches('a'))) {
+    return;
+  }
+
+  if (event.target.textContent === 'Entries') {
+    event.preventDefault();
+    showPage('entries');
   }
 }
 
