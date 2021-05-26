@@ -44,9 +44,9 @@ function handleSave(event) {
 
   $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
 
-  $newEntry.reset();
+  $entriesDisplayed.insertBefore(journalEntry(entry), $entriesDisplayed.firstElementChild);
 
-  showPage('entries');
+  $newEntry.reset();
 }
 
 function handleNew(event) {
@@ -55,7 +55,7 @@ function handleNew(event) {
 
 function handleDOMLoad(event) {
   for (var i = 0; i < data.entries.length; i++) {
-    $entriesDisplayed.appendChild(journalEntry(data.entries[i]));
+    $entriesDisplayed.insertBefore(journalEntry(data.entries[i]), $entriesDisplayed.firstElementChild);
   }
 }
 
