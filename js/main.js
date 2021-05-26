@@ -86,6 +86,8 @@ function handleEdit(event) {
   if (!(event.target.matches('.edit-button'))) {
     return;
   }
+
+  showPage('entry-form');
 }
 
 function showPage(page) {
