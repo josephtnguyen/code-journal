@@ -13,8 +13,6 @@ var $entriesDisplayed = document.querySelector('.entries-list');
 var $navBar = document.querySelector('.nav-bar');
 var $noEntriesMessage = document.querySelector('.entries-none');
 
-var $targetedLi = null;
-
 $photoUrl.addEventListener('input', handleUrl);
 $imgPreview.addEventListener('error', handleImgError);
 $newEntry.addEventListener('submit', handleSave);
@@ -39,8 +37,6 @@ function handleImgError(event) {
 function handleSave(event) {
   event.preventDefault();
 
-  $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
-
   var entry = {
     title: $newTitle.value,
     url: $newUrl.value,
@@ -51,36 +47,50 @@ function handleSave(event) {
   if (data.editing) {
     entry.id = data.editing.id;
 
+    for (var i = 0; i < $entriesDisplayed.childNodes.length; i++) {
+      if ($entriesDisplayed.childNodes[i].getAttribute('data-entry-id')) {
+        if (entry.id == $entriesDisplayed.childNodes[i].getAttribute('data-entry-id')) {
+          var $targetedLi = $entriesDisplayed.childNodes[i];
+          break;
+        }
+      }
+    }
     $targetedLi.replaceWith(journalEntry(entry));
-    $targetedLi = null;
 
-    for (var i = 0; i < data.entries.length; i++) {
+    for (i = 0; i < data.entries.length; i++) {
       if (data.entries[i].id === entry.id) {
         data.entries[i] = entry;
         break;
       }
     }
-    data.editing = null;
   } else {
     data.nextEntryId++;
-    data.entries.unshift(entry);
+    data.entries.push(entry);
 
     $entriesDisplayed.prepend(journalEntry(entry));
   }
 
-  $newEntry.reset();
+  refreshNewEntry();
 
   $noEntriesMessage.classList.add('hidden');
   showPage('entries');
 }
 
 function handleNew(event) {
+  refreshNewEntry();
   showPage('entry-form');
 }
 
 function handleDOMLoad(event) {
   if (data.entries.length !== 0) {
     $noEntriesMessage.classList.add('hidden');
+  }
+
+  if (data.editing) {
+    $newTitle.value = data.editing.title;
+    $newUrl.value = data.editing.url;
+    $newNotes.value = data.editing.notes;
+    $imgPreview.setAttribute('src', $newUrl.value);
   }
 
   for (var i = 0; i < data.entries.length; i++) {
@@ -107,8 +117,7 @@ function handleEdit(event) {
   showPage('entry-form');
 
   for (var i = 0; i < data.entries.length; i++) {
-    $targetedLi = event.target.closest('.entries-list-item');
-    if (data.entries[i].id == $targetedLi.getAttribute('data-entry-id')) {
+    if (data.entries[i].id == event.target.closest('.entries-list-item').getAttribute('data-entry-id')) {
       data.editing = data.entries[i];
       break;
     }
@@ -117,6 +126,8 @@ function handleEdit(event) {
   $newTitle.value = data.editing.title;
   $newUrl.value = data.editing.url;
   $newNotes.value = data.editing.notes;
+
+  $imgPreview.setAttribute('src', $newUrl.value);
 }
 
 function showPage(page) {
@@ -189,4 +200,10 @@ function journalEntry(entry) {
   $textCol.appendChild($entryNotes);
 
   return $li;
+}
+
+function refreshNewEntry() {
+  $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $newEntry.reset();
+  data.editing = null;
 }
