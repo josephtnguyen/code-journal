@@ -153,6 +153,11 @@ button {
   margin-right: .5rem;
 }
 
+.edit-profile-button {
+  margin: 1rem 0;
+  padding: .25rem .5rem;
+}
+
 .entry-par {
   white-space: pre-line;
   margin: 0;

@@ -35,7 +35,7 @@ $newButton.addEventListener('click', handleNew);
 document.addEventListener('DOMContentLoaded', handleDOMLoad);
 $navBar.addEventListener('click', handleNav);
 
-$entriesDisplayed.addEventListener('click', handleEdit);
+$entriesDisplayed.addEventListener('click', handleEntryEdit);
 
 $deleteButton.addEventListener('click', handleDeleteRequest);
 $deleteBox.addEventListener('click', handleDeleteBox);
@@ -157,7 +157,7 @@ function handleNav(event) {
   }
 }
 
-function handleEdit(event) {
+function handleEntryEdit(event) {
   if (!(event.target.matches('.edit-button'))) {
     return;
   }
@@ -371,6 +371,11 @@ function profileLoadOut(profile) {
   $bio.className = 'entry-par';
   $bio.textContent = data.profile.bio;
   $colText.appendChild($bio);
+
+  var $edit = document.createElement('button');
+  $edit.className = 'edit-profile-button rounded';
+  $edit.textContent = 'Edit';
+  $colText.appendChild($edit);
 
   return $profileLoadOut;
 }
