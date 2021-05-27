@@ -20,7 +20,7 @@ var $deleteBox = document.querySelector('.delete-box');
 
 $photoUrl.addEventListener('input', handleUrl);
 $imgPreview.addEventListener('error', handleImgError);
-$newEntry.addEventListener('submit', handleSave);
+$newEntry.addEventListener('submit', handleEntrySave);
 
 $newButton.addEventListener('click', handleNew);
 document.addEventListener('DOMContentLoaded', handleDOMLoad);
@@ -42,7 +42,7 @@ function handleImgError(event) {
   $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
 }
 
-function handleSave(event) {
+function handleEntrySave(event) {
   event.preventDefault();
 
   var entry = {
@@ -111,9 +111,11 @@ function handleNav(event) {
     return;
   }
 
+  event.preventDefault();
   if (event.target.textContent === 'Entries') {
-    event.preventDefault();
     showPage('entries');
+  } else if (event.target.textContent === 'Profile') {
+    showPage('profile');
   }
 }
 

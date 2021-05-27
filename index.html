@@ -38,7 +38,8 @@
         <div class="column-full">
           <h2 class="header-heading">Code Journal</h2>
           <nav class="nav-bar">
-            <a href="">Entries</a>
+            <a href="" class="nav-link">Entries</a>
+            <a href="" class="nav-link">Profile</a>
           </nav>
         </div>
       </div>
@@ -70,13 +71,13 @@
             <!-- Title -->
             <div class="column-half">
               <label for="new-title">
-                <h3 class="new-subheading">Title</h3>
+                <h3 class="form-subheading">Title</h3>
               </label>
               <input type="text" name="new-title" id="new-title" class="text-box max-width rounded" required>
 
               <!-- URL -->
               <label for="new-url">
-                <h3 class="new-subheading">Photo URL</h3>
+                <h3 class="form-subheading">Photo URL</h3>
               </label>
               <input type="url" name="new-url" id="new-url" class="text-box max-width rounded photo-url" required>
             </div>
@@ -86,9 +87,75 @@
           <div class="row">
             <div class="column-full">
               <label for="new-notes">
-                <h3 class="new-subheading">Notes</h3>
+                <h3 class="form-subheading">Notes</h3>
               </label>
               <textarea name="new-notes" id="new-notes" cols="30" rows="6" class="text-box max-width rounded" required></textarea>
+            </div>
+          </div>
+
+          <!-- Save Button -->
+          <div class="row">
+            <div class="column-full new-footer">
+              <button class="delete-button hidden">Delete Entry</button>
+              <button class="save-button rounded">Save</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- New Profile -->
+      <div data-view="profile" class="view hidden">
+        <form action="" class="profile-form">
+          <!-- Heading -->
+          <div class="row">
+            <div class="column-full">
+              <h1 class="page-heading">Edit Profile</h1>
+            </div>
+          </div>
+
+          <!-- Image Preview -->
+          <div class="row">
+            <div class="column-half">
+              <img src="images/placeholder-image-square.jpg" alt="Placeholder image" class="max-width rounded img-preview">
+            </div>
+
+            <!-- Info -->
+            <div class="column-half">
+              <!-- Avatar URL -->
+              <label for="avatar-url">
+                <h3 class="form-subheading">Avatar URL</h3>
+              </label>
+              <input type="url" name="avatar-url" id="avatar-url" class="text-box max-width rounded photo-url" required>
+
+              <!-- Username -->
+              <label for="username">
+                <h3 class="form-subheading">Username</h3>
+              </label>
+              <input type="text" name="username" id="username" class="text-box max-width rounded" required>
+
+              <!-- Full Name -->
+              <label for="full-name">
+                <h3 class="form-subheading">Full Name</h3>
+              </label>
+              <input type="text" name="full-name" id="full-name" class="text-box max-width rounded" required>
+
+              <!-- Location -->
+              <label for="location">
+                <h3 class="form-subheading">Location</h3>
+              </label>
+              <input type="text" name="location" id="location" class="text-box max-width rounded" required>
+            </div>
+          </div>
+
+          <!-- Biography -->
+          <div class="row">
+            <div class="column-full">
+              <label for="bio">
+                <h3 class="form-subheading">Bio</h3>
+              </label>
+              <textarea name="bio" id="bio" cols="30" rows="6" class="text-box max-width rounded"
+                required></textarea>
             </div>
           </div>
 
