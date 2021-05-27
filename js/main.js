@@ -15,6 +15,8 @@ var $entriesDisplayed = document.querySelector('.entries-list');
 var $navBar = document.querySelector('.nav-bar');
 var $noEntriesMessage = document.querySelector('.entries-none');
 
+var $deleteModal = document.querySelector('.delete-modal-container');
+
 $photoUrl.addEventListener('input', handleUrl);
 $imgPreview.addEventListener('error', handleImgError);
 $newEntry.addEventListener('submit', handleSave);
@@ -24,6 +26,8 @@ document.addEventListener('DOMContentLoaded', handleDOMLoad);
 $navBar.addEventListener('click', handleNav);
 
 $entriesDisplayed.addEventListener('click', handleEdit);
+
+$deleteButton.addEventListener('click', handleDelete);
 
 showPage(data.view);
 
@@ -138,6 +142,10 @@ function handleEdit(event) {
   $newNotes.value = data.editing.notes;
 
   $imgPreview.setAttribute('src', $newUrl.value);
+}
+
+function handleDelete(event) {
+  $deleteModal.classList.remove('hidden');
 }
 
 function showPage(page) {
