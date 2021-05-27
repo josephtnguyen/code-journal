@@ -20,11 +20,12 @@ var $deleteBox = document.querySelector('.delete-box');
 
 var $avatarPreview = document.querySelector('.avatar-preview');
 var $avatarUrl = document.querySelector('.avatar-url');
-var $profile = document.querySelector('.profile-form');
+var $editProfile = document.querySelector('.profile-form');
 var $profileUsername = document.querySelector('#profile-username');
 var $profileFullName = document.querySelector('#profile-full-name');
 var $profileLocation = document.querySelector('#profile-location');
 var $profileBio = document.querySelector('#profile-bio');
+var $profile = document.querySelector('.profile');
 
 $entryUrl.addEventListener('input', handlePreview);
 $entryPreview.addEventListener('error', handleImgError);
@@ -41,7 +42,8 @@ $deleteBox.addEventListener('click', handleDeleteBox);
 
 $avatarUrl.addEventListener('input', handlePreview);
 $avatarPreview.addEventListener('error', handleImgError);
-$profile.addEventListener('submit', handleProfileSave);
+$editProfile.addEventListener('submit', handleProfileSave);
+
 
 showPage(data.view);
 
@@ -215,6 +217,11 @@ function showPage(page) {
       $views[i].classList.add('hidden');
     }
   }
+
+  if (page === 'profile') {
+    $profile.innerHTML = '';
+    $profile.appendChild(profileLoadOut(data.profile));
+  }
 }
 
 function journalEntry(entry) {
@@ -305,8 +312,6 @@ function profileLoadOut(profile) {
   // </div>
 
   var $profileLoadOut = document.createElement('div');
-  $profileLoadOut.setAttribute('data-view', 'profile');
-  $profileLoadOut.className = 'view hidden';
 
   var $rowName = document.createElement('div');
   $rowName.className = 'row';
@@ -374,7 +379,7 @@ function refreshNewEntry() {
 
 function refreshEditProfile() {
   $avatarPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
-  $profile.reset();
+  $editProfile.reset();
 }
 
 function deleteEntryFromData(id) {
