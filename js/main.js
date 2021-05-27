@@ -151,6 +151,10 @@ function handleNav(event) {
     return;
   }
 
+  if (!(data.profile.username)) {
+    return;
+  }
+
   event.preventDefault();
   if (event.target.textContent === 'Entries') {
     showPage('entries');
