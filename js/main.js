@@ -44,6 +44,8 @@ $avatarUrl.addEventListener('input', handlePreview);
 $avatarPreview.addEventListener('error', handleImgError);
 $editProfile.addEventListener('submit', handleProfileSave);
 
+$profile.addEventListener('click', handleProfileEdit);
+
 
 function handlePreview(event) {
   if (event.target.closest('.entry-form')) {
@@ -179,6 +181,14 @@ function handleEntryEdit(event) {
   $newNotes.value = data.editing.notes;
 
   $entryPreview.setAttribute('src', $newUrl.value);
+}
+
+function handleProfileEdit(event) {
+  if (!(event.target.matches('.edit-profile-button'))) {
+    return;
+  }
+
+  showPage('edit-profile');
 }
 
 function handleDeleteRequest(event) {

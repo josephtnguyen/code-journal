@@ -111,7 +111,8 @@ button {
 .new-button:active,
 .edit-button:active,
 .cancel-button:active,
-.confirm-button:active {
+.confirm-button:active,
+.edit-profile-button:active {
   transform: translateY(2px);
 }
 
