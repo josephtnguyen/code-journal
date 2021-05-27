@@ -1,8 +1,8 @@
 /* global data */
 /* exported data */
 var $newEntry = document.querySelector('.entry-form');
-var $imgPreview = document.querySelector('.img-preview');
-var $photoUrl = document.querySelector('.photo-url');
+var $entryPreview = document.querySelector('.entry-preview');
+var $entryUrl = document.querySelector('.entry-url');
 var $newTitle = document.querySelector('#new-title');
 var $newUrl = document.querySelector('#new-url');
 var $newNotes = document.querySelector('#new-notes');
@@ -18,9 +18,17 @@ var $noEntriesMessage = document.querySelector('.entries-none');
 var $deleteModal = document.querySelector('.delete-modal-container');
 var $deleteBox = document.querySelector('.delete-box');
 
-$photoUrl.addEventListener('input', handleUrl);
-$imgPreview.addEventListener('error', handleImgError);
-$newEntry.addEventListener('submit', handleSave);
+var $avatarPreview = document.querySelector('.avatar-preview');
+var $avatarUrl = document.querySelector('.avatar-url');
+var $profile = document.querySelector('.profile-form');
+var $profileUsername = document.querySelector('#profile-username');
+var $profileFullName = document.querySelector('#profile-full-name');
+var $profileLocation = document.querySelector('#profile-location');
+var $profileBio = document.querySelector('#profile-bio');
+
+$entryUrl.addEventListener('input', handlePreview);
+$entryPreview.addEventListener('error', handleImgError);
+$newEntry.addEventListener('submit', handleEntrySave);
 
 $newButton.addEventListener('click', handleNew);
 document.addEventListener('DOMContentLoaded', handleDOMLoad);
@@ -31,18 +39,30 @@ $entriesDisplayed.addEventListener('click', handleEdit);
 $deleteButton.addEventListener('click', handleDeleteRequest);
 $deleteBox.addEventListener('click', handleDeleteBox);
 
+$avatarUrl.addEventListener('input', handlePreview);
+$avatarPreview.addEventListener('error', handleImgError);
+$profile.addEventListener('submit', handleProfileSave);
+
 showPage(data.view);
 
 
-function handleUrl(event) {
-  $imgPreview.setAttribute('src', event.target.value);
+function handlePreview(event) {
+  if (event.target.closest('.entry-form')) {
+    $entryPreview.setAttribute('src', event.target.value);
+  } else if (event.target.closest('.profile-form')) {
+    $avatarPreview.setAttribute('src', event.target.value);
+  }
 }
 
 function handleImgError(event) {
-  $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
+  if (event.target.closest('.entry-form')) {
+    $entryPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
+  } else if (event.target.closest('.profile-form')) {
+    $avatarPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
+  }
 }
 
-function handleSave(event) {
+function handleEntrySave(event) {
   event.preventDefault();
 
   var entry = {
@@ -77,6 +97,22 @@ function handleSave(event) {
   showPage('entries');
 }
 
+function handleProfileSave(event) {
+  event.preventDefault();
+
+  var profile = {
+    avatar: $avatarUrl.value,
+    username: $profileUsername.value,
+    fullName: $profileFullName.value,
+    location: $profileLocation.value,
+    bio: $profileBio.value
+  }
+
+  data.profile = profile;
+
+  refreshEditProfile();
+}
+
 function handleNew(event) {
   refreshNewEntry();
 
@@ -95,7 +131,7 @@ function handleDOMLoad(event) {
     $newTitle.value = data.editing.title;
     $newUrl.value = data.editing.url;
     $newNotes.value = data.editing.notes;
-    $imgPreview.setAttribute('src', $newUrl.value);
+    $entryPreview.setAttribute('src', $newUrl.value);
 
     $newFooter.classList.add('show-delete');
     $deleteButton.classList.remove('hidden');
@@ -111,9 +147,11 @@ function handleNav(event) {
     return;
   }
 
+  event.preventDefault();
   if (event.target.textContent === 'Entries') {
-    event.preventDefault();
     showPage('entries');
+  } else if (event.target.textContent === 'Profile') {
+    showPage('profile');
   }
 }
 
@@ -138,7 +176,7 @@ function handleEdit(event) {
   $newUrl.value = data.editing.url;
   $newNotes.value = data.editing.notes;
 
-  $imgPreview.setAttribute('src', $newUrl.value);
+  $entryPreview.setAttribute('src', $newUrl.value);
 }
 
 function handleDeleteRequest(event) {
@@ -210,7 +248,7 @@ function journalEntry(entry) {
 
   var $image = document.createElement('img');
   $image.setAttribute('src', entry.url);
-  $image.className = 'max-width rounded img-preview';
+  $image.className = 'max-width rounded entry-preview';
   $imgCol.appendChild($image);
 
   var $textCol = document.createElement('div');
@@ -240,9 +278,14 @@ function journalEntry(entry) {
 }
 
 function refreshNewEntry() {
-  $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $entryPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
   $newEntry.reset();
   data.editing = null;
+}
+
+function refreshEditProfile() {
+  $avatarPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $profile.reset();
 }
 
 function deleteEntryFromData(id) {

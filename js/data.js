@@ -4,7 +4,14 @@ var data = {
   view: 'entry-form',
   entries: [],
   editing: null,
-  nextEntryId: 1
+  nextEntryId: 1,
+  profile: {
+    avatar: null,
+    username: null,
+    fullName: null,
+    location: null,
+    bio: null
+  }
 };
 
 var previousDataJSON = localStorage.getItem('data-JSON');
