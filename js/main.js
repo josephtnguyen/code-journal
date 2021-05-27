@@ -161,6 +161,9 @@ function handleDeleteBox(event) {
     if (data.entries.length === 0) {
       $noEntriesMessage.classList.remove('hidden');
     }
+
+    $deleteModal.classList.add('hidden');
+    showPage('entries');
   }
 }
 
