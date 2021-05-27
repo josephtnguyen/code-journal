@@ -1,8 +1,8 @@
 /* global data */
 /* exported data */
 var $newEntry = document.querySelector('.entry-form');
-var $imgPreview = document.querySelector('.img-preview');
-var $photoUrl = document.querySelector('.photo-url');
+var $entryPreview = document.querySelector('.entry-preview');
+var $entryUrl = document.querySelector('.entry-url');
 var $newTitle = document.querySelector('#new-title');
 var $newUrl = document.querySelector('#new-url');
 var $newNotes = document.querySelector('#new-notes');
@@ -18,8 +18,12 @@ var $noEntriesMessage = document.querySelector('.entries-none');
 var $deleteModal = document.querySelector('.delete-modal-container');
 var $deleteBox = document.querySelector('.delete-box');
 
-$photoUrl.addEventListener('input', handleUrl);
-$imgPreview.addEventListener('error', handleImgError);
+var $avatarPreview = document.querySelector('.avatar-preview');
+var $avatarUrl = document.querySelector('.avatar-url');
+var $profile = document.querySelector('.profile-form');
+
+$entryUrl.addEventListener('input', handlePreview);
+$entryPreview.addEventListener('error', handleImgError);
 $newEntry.addEventListener('submit', handleEntrySave);
 
 $newButton.addEventListener('click', handleNew);
@@ -31,15 +35,27 @@ $entriesDisplayed.addEventListener('click', handleEdit);
 $deleteButton.addEventListener('click', handleDeleteRequest);
 $deleteBox.addEventListener('click', handleDeleteBox);
 
+$avatarUrl.addEventListener('input', handlePreview);
+$avatarPreview.addEventListener('error', handleImgError);
+$profile.addEventListener('submit', handleProfileSave);
+
 showPage(data.view);
 
 
-function handleUrl(event) {
-  $imgPreview.setAttribute('src', event.target.value);
+function handlePreview(event) {
+  if (event.target.closest('.entry-form')) {
+    $entryPreview.setAttribute('src', event.target.value);
+  } else if (event.target.closest('.profile-form')) {
+    $avatarPreview.setAttribute('src', event.target.value);
+  }
 }
 
 function handleImgError(event) {
-  $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
+  if (event.target.closest('.entry-form')) {
+    $entryPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
+  } else if (event.target.closest('.profile-form')) {
+    $avatarPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
+  }
 }
 
 function handleEntrySave(event) {
@@ -75,6 +91,10 @@ function handleEntrySave(event) {
 
   $noEntriesMessage.classList.add('hidden');
   showPage('entries');
+}
+
+function handleProfileSave(event) {
+  event.preventDefault();
 }
 
 function handleNew(event) {
@@ -242,7 +262,7 @@ function journalEntry(entry) {
 }
 
 function refreshNewEntry() {
-  $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $entryPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
   $newEntry.reset();
   data.editing = null;
 }
