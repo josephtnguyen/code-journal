@@ -35,7 +35,7 @@ $newButton.addEventListener('click', handleNew);
 document.addEventListener('DOMContentLoaded', handleDOMLoad);
 $navBar.addEventListener('click', handleNav);
 
-$entriesDisplayed.addEventListener('click', handleEdit);
+$entriesDisplayed.addEventListener('click', handleEntryEdit);
 
 $deleteButton.addEventListener('click', handleDeleteRequest);
 $deleteBox.addEventListener('click', handleDeleteBox);
@@ -43,6 +43,8 @@ $deleteBox.addEventListener('click', handleDeleteBox);
 $avatarUrl.addEventListener('input', handlePreview);
 $avatarPreview.addEventListener('error', handleImgError);
 $editProfile.addEventListener('submit', handleProfileSave);
+
+$profile.addEventListener('click', handleProfileEdit);
 
 
 function handlePreview(event) {
@@ -139,6 +141,16 @@ function handleDOMLoad(event) {
     $deleteButton.classList.remove('hidden');
   }
 
+  if (data.view === 'edit-profile') {
+    $avatarPreview.setAttribute('src', data.profile.avatar);
+
+    $avatarUrl.value = data.profile.avatar;
+    $profileUsername.value = data.profile.username;
+    $profileFullName.value = data.profile.fullName;
+    $profileLocation.value = data.profile.location;
+    $profileBio.value = data.profile.bio;
+  }
+
   for (var i = 0; i < data.entries.length; i++) {
     $entriesDisplayed.prepend(journalEntry(data.entries[i]));
   }
@@ -146,6 +158,10 @@ function handleDOMLoad(event) {
 
 function handleNav(event) {
   if (!(event.target.matches('a'))) {
+    return;
+  }
+
+  if (!(data.profile.username)) {
     return;
   }
 
@@ -157,7 +173,7 @@ function handleNav(event) {
   }
 }
 
-function handleEdit(event) {
+function handleEntryEdit(event) {
   if (!(event.target.matches('.edit-button'))) {
     return;
   }
@@ -179,6 +195,22 @@ function handleEdit(event) {
   $newNotes.value = data.editing.notes;
 
   $entryPreview.setAttribute('src', $newUrl.value);
+}
+
+function handleProfileEdit(event) {
+  if (!(event.target.matches('.edit-profile-button'))) {
+    return;
+  }
+
+  $avatarPreview.setAttribute('src', data.profile.avatar);
+
+  $avatarUrl.value = data.profile.avatar;
+  $profileUsername.value = data.profile.username;
+  $profileFullName.value = data.profile.fullName;
+  $profileLocation.value = data.profile.location;
+  $profileBio.value = data.profile.bio;
+
+  showPage('edit-profile');
 }
 
 function handleDeleteRequest(event) {
@@ -371,6 +403,11 @@ function profileLoadOut(profile) {
   $bio.className = 'entry-par';
   $bio.textContent = data.profile.bio;
   $colText.appendChild($bio);
+
+  var $edit = document.createElement('button');
+  $edit.className = 'edit-profile-button rounded';
+  $edit.textContent = 'Edit';
+  $colText.appendChild($edit);
 
   return $profileLoadOut;
 }

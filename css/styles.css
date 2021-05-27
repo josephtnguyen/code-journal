@@ -111,7 +111,8 @@ button {
 .new-button:active,
 .edit-button:active,
 .cancel-button:active,
-.confirm-button:active {
+.confirm-button:active,
+.edit-profile-button:active {
   transform: translateY(2px);
 }
 
@@ -151,6 +152,11 @@ button {
   color: #562B81;
   font-size: 1.5rem;
   margin-right: .5rem;
+}
+
+.edit-profile-button {
+  margin: 1rem 0;
+  padding: .25rem .5rem;
 }
 
 .entry-par {
