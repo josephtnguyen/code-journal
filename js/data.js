@@ -5,7 +5,13 @@ var data = {
   entries: [],
   editing: null,
   nextEntryId: 1,
-  profile: {}
+  profile: {
+    avatar: null,
+    username: null,
+    fullName: null,
+    location: null,
+    bio: null
+  }
 };
 
 var previousDataJSON = localStorage.getItem('data-JSON');
