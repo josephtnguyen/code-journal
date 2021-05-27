@@ -188,6 +188,14 @@ function handleProfileEdit(event) {
     return;
   }
 
+  $avatarPreview.setAttribute('src', data.profile.avatar);
+
+  $avatarUrl.value = data.profile.avatar;
+  $profileUsername.value = data.profile.username;
+  $profileFullName.value = data.profile.fullName;
+  $profileLocation.value = data.profile.location;
+  $profileBio.value = data.profile.bio;
+
   showPage('edit-profile');
 }
 
