@@ -55,12 +55,7 @@ function handleSave(event) {
   if (data.editing) {
     entry.id = data.editing.id;
 
-    for (var i = 0; i < $entriesDisplayed.childNodes.length; i++) {
-      if (entry.id == $entriesDisplayed.childNodes[i].getAttribute('data-entry-id')) {
-        var $targetedLi = $entriesDisplayed.childNodes[i];
-        break;
-      }
-    }
+    var $targetedLi = targetedEntry(entry.id);
     $targetedLi.replaceWith(journalEntry(entry));
 
     for (i = 0; i < data.entries.length; i++) {
@@ -158,6 +153,14 @@ function handleDeleteBox(event) {
 
   if (event.target.matches('.cancel-button')) {
     $deleteModal.classList.add('hidden');
+  } else if (event.target.matches('.confirm-button')) {
+    var $targetedLi = targetedEntry(data.editing.id);
+    $targetedLi.remove();
+    deleteEntryFromData(data.editing.id);
+
+    if (data.entries.length === 0) {
+      $noEntriesMessage.classList.remove('hidden');
+    }
   }
 }
 
@@ -237,4 +240,21 @@ function refreshNewEntry() {
   $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
   $newEntry.reset();
   data.editing = null;
+}
+
+function deleteEntryFromData(id) {
+  for (var i = 0; i < data.entries.length; i++) {
+    if (id == data.entries[i].id) {
+      data.entries.splice(i, 1);
+      break;
+    }
+  }
+}
+
+function targetedEntry(id) {
+  for (var i = 0; i < $entriesDisplayed.childNodes.length; i++) {
+    if (id == $entriesDisplayed.childNodes[i].getAttribute('data-entry-id')) {
+      return $entriesDisplayed.childNodes[i];
+    }
+  }
 }
