@@ -109,6 +109,8 @@ function handleProfileSave(event) {
   }
 
   data.profile = profile;
+
+  refreshEditProfile();
 }
 
 function handleNew(event) {
@@ -279,6 +281,11 @@ function refreshNewEntry() {
   $entryPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
   $newEntry.reset();
   data.editing = null;
+}
+
+function refreshEditProfile() {
+  $avatarPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $profile.reset();
 }
 
 function deleteEntryFromData(id) {
