@@ -89,6 +89,10 @@ button {
   text-transform: none;
 }
 
+.delete-button:hover {
+  text-decoration: none;
+}
+
 .save-button {
   margin: 1rem 0;
   padding: .25rem 1rem;
@@ -99,7 +103,11 @@ button {
   padding: .25rem .5rem;
 }
 
-.new-button:active {
+.save-button:active,
+.new-button:active,
+.edit-button:active,
+.cancel-button:active,
+.confirm-button:active {
   transform: translateY(2px);
 }
 
@@ -128,10 +136,6 @@ button {
   color: #562B81;
   font-size: 1.5rem;
   cursor: pointer;
-}
-
-.edit-button:active {
-  transform: translateY(2px);
 }
 
 .entry-par {
