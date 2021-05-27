@@ -131,7 +131,7 @@ function handleDOMLoad(event) {
     $newTitle.value = data.editing.title;
     $newUrl.value = data.editing.url;
     $newNotes.value = data.editing.notes;
-    $imgPreview.setAttribute('src', $newUrl.value);
+    $entryPreview.setAttribute('src', $newUrl.value);
 
     $newFooter.classList.add('show-delete');
     $deleteButton.classList.remove('hidden');
@@ -176,7 +176,7 @@ function handleEdit(event) {
   $newUrl.value = data.editing.url;
   $newNotes.value = data.editing.notes;
 
-  $imgPreview.setAttribute('src', $newUrl.value);
+  $entryPreview.setAttribute('src', $newUrl.value);
 }
 
 function handleDeleteRequest(event) {
@@ -248,7 +248,7 @@ function journalEntry(entry) {
 
   var $image = document.createElement('img');
   $image.setAttribute('src', entry.url);
-  $image.className = 'max-width rounded img-preview';
+  $image.className = 'max-width rounded entry-preview';
   $imgCol.appendChild($image);
 
   var $textCol = document.createElement('div');
