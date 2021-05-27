@@ -277,6 +277,95 @@ function journalEntry(entry) {
   return $li;
 }
 
+function profileLoadOut(profile) {
+  // <div data-view="profile" class="view hidden">
+  //   <div class="row">
+  //     <div class="column-full">
+  //       <h1 class="page-heading">Full Name</h1>
+  //     </div>
+  //   </div>
+  //
+  //   <div class="row">
+  //     <div class="column-half">
+  //       <img class="max-width rounded avatar-preview">
+  //     </div>
+  //
+  //     <div class="column-half">
+  //       <h3 class="profile-detail">
+  //         <span class="fa profile-icon"></span>
+  //         username
+  //       </h3>
+  //       <h3 class="profile-detail">
+  //         <span class="fa profile-icon"></span>
+  //         location
+  //       </h3>
+  //       <p class="entry-par">Bio</p>
+  //     </div>
+  //   </div>
+  // </div>
+
+  var $profileLoadOut = document.createElement('div');
+  $profileLoadOut.setAttribute('data-view', 'profile');
+  $profileLoadOut.className = 'view hidden';
+
+  var $rowName = document.createElement('div');
+  $rowName.className = 'row';
+  $profileLoadOut.appendChild($rowName);
+
+  var $colName = document.createElement('div');
+  $colName.className = 'column-full';
+  $rowName.appendChild($colName);
+
+  var $fullName = document.createElement('h1');
+  $fullName.className = 'page-heading';
+  $fullName.textContent = data.profile.fullName;
+  $colName.appendChild($fullName);
+
+  var $rowInfo = document.createElement('div');
+  $rowInfo.className = 'row';
+  $profileLoadOut.appendChild($rowInfo);
+
+  var $colImage = document.createElement('div');
+  $colImage.className = 'column-half';
+  $rowInfo.appendChild($colImage);
+
+  var $image = document.createElement('img');
+  $image.className = 'max-width rounded avatar-preview';
+  $image.setAttribute('src', data.profile.avatar);
+  $colImage.appendChild($image);
+
+  var $colText = document.createElement('div');
+  $colText.className = 'column-half';
+  $rowInfo.appendChild($colText);
+
+  var $username = document.createElement('h3');
+  $username.className = 'profile-detail';
+  $username.textContent = data.profile.username;
+  $colText.appendChild($username);
+
+  var $usernameIcon = document.createElement('span');
+  $usernameIcon.className = 'fa profile-icon';
+  $usernameIcon.textContent = '\uf007';
+  $username.prepend($usernameIcon);
+
+  var $location = document.createElement('h3');
+  $location.className = 'profile-detail';
+  $location.textContent = data.profile.location;
+  $colText.appendChild($location);
+
+  var $locationIcon = document.createElement('span');
+  $locationIcon.className = 'fa profile-icon';
+  $locationIcon.textContent = '\uf3c5';
+  $location.prepend($locationIcon);
+
+  var $bio = document.createElement('p');
+  $bio.className = 'entry-par';
+  $bio.textContent = data.profile.bio;
+  $colText.appendChild($bio);
+
+  return $profileLoadOut;
+}
+
 function refreshNewEntry() {
   $entryPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
   $newEntry.reset();
