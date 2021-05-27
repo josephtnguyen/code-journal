@@ -21,6 +21,10 @@ var $deleteBox = document.querySelector('.delete-box');
 var $avatarPreview = document.querySelector('.avatar-preview');
 var $avatarUrl = document.querySelector('.avatar-url');
 var $profile = document.querySelector('.profile-form');
+var $profileUsername = document.querySelector('#profile-username');
+var $profileFullName = document.querySelector('#profile-full-name');
+var $profileLocation = document.querySelector('#profile-location');
+var $profileBio = document.querySelector('#profile-bio');
 
 $entryUrl.addEventListener('input', handlePreview);
 $entryPreview.addEventListener('error', handleImgError);
@@ -95,6 +99,16 @@ function handleEntrySave(event) {
 
 function handleProfileSave(event) {
   event.preventDefault();
+
+  var profile = {
+    avatar: $avatarUrl.value,
+    username: $profileUsername.value,
+    fullName: $profileFullName.value,
+    location: $profileLocation.value,
+    bio: $profileBio.value
+  }
+
+  data.profile = profile;
 }
 
 function handleNew(event) {
