@@ -113,6 +113,7 @@ function handleProfileSave(event) {
   data.profile = profile;
 
   refreshEditProfile();
+  showPage('profile');
 }
 
 function handleNew(event) {
