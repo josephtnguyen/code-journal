@@ -19,6 +19,19 @@
     rel="stylesheet">
 </head>
 <body>
+  <!-- Delete Modal -->
+  <div class="delete-modal-container hidden">
+    <div class="delete-box rounded">
+      <div class="delete-text">
+        <p>Are you sure you want to delete this entry?</p>
+      </div>
+      <div class="justify-away">
+        <button class="cancel-button rounded">Cancel</button>
+        <button class="confirm-button rounded">Confirm</button>
+      </div>
+    </div>
+  </div>
+
   <header>
     <div class="container">
       <div class="row">
@@ -81,7 +94,8 @@
 
           <!-- Save Button -->
           <div class="row">
-            <div class="column-full save-wrap">
+            <div class="column-full new-footer">
+              <button class="delete-button hidden">Delete Entry</button>
               <button class="save-button rounded">Save</button>
             </div>
           </div>

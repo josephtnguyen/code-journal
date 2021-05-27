@@ -6,12 +6,17 @@ var $photoUrl = document.querySelector('.photo-url');
 var $newTitle = document.querySelector('#new-title');
 var $newUrl = document.querySelector('#new-url');
 var $newNotes = document.querySelector('#new-notes');
+var $newFooter = document.querySelector('.new-footer');
+var $deleteButton = document.querySelector('.delete-button');
 
 var $views = document.querySelectorAll('.view');
 var $newButton = document.querySelector('.new-button');
 var $entriesDisplayed = document.querySelector('.entries-list');
 var $navBar = document.querySelector('.nav-bar');
 var $noEntriesMessage = document.querySelector('.entries-none');
+
+var $deleteModal = document.querySelector('.delete-modal-container');
+var $deleteBox = document.querySelector('.delete-box');
 
 $photoUrl.addEventListener('input', handleUrl);
 $imgPreview.addEventListener('error', handleImgError);
@@ -22,6 +27,9 @@ document.addEventListener('DOMContentLoaded', handleDOMLoad);
 $navBar.addEventListener('click', handleNav);
 
 $entriesDisplayed.addEventListener('click', handleEdit);
+
+$deleteButton.addEventListener('click', handleDeleteRequest);
+$deleteBox.addEventListener('click', handleDeleteBox);
 
 showPage(data.view);
 
@@ -47,12 +55,7 @@ function handleSave(event) {
   if (data.editing) {
     entry.id = data.editing.id;
 
-    for (var i = 0; i < $entriesDisplayed.childNodes.length; i++) {
-      if (entry.id == $entriesDisplayed.childNodes[i].getAttribute('data-entry-id')) {
-        var $targetedLi = $entriesDisplayed.childNodes[i];
-        break;
-      }
-    }
+    var $targetedLi = targetedEntry(entry.id);
     $targetedLi.replaceWith(journalEntry(entry));
 
     for (i = 0; i < data.entries.length; i++) {
@@ -76,6 +79,10 @@ function handleSave(event) {
 
 function handleNew(event) {
   refreshNewEntry();
+
+  $newFooter.classList.remove('show-delete');
+  $deleteButton.classList.add('hidden');
+
   showPage('entry-form');
 }
 
@@ -89,6 +96,9 @@ function handleDOMLoad(event) {
     $newUrl.value = data.editing.url;
     $newNotes.value = data.editing.notes;
     $imgPreview.setAttribute('src', $newUrl.value);
+
+    $newFooter.classList.add('show-delete');
+    $deleteButton.classList.remove('hidden');
   }
 
   for (var i = 0; i < data.entries.length; i++) {
@@ -112,6 +122,9 @@ function handleEdit(event) {
     return;
   }
 
+  $newFooter.classList.add('show-delete');
+  $deleteButton.classList.remove('hidden');
+
   showPage('entry-form');
 
   for (var i = 0; i < data.entries.length; i++) {
@@ -126,6 +139,32 @@ function handleEdit(event) {
   $newNotes.value = data.editing.notes;
 
   $imgPreview.setAttribute('src', $newUrl.value);
+}
+
+function handleDeleteRequest(event) {
+  event.preventDefault();
+  $deleteModal.classList.remove('hidden');
+}
+
+function handleDeleteBox(event) {
+  if (!(event.target.matches('button'))) {
+    return;
+  }
+
+  if (event.target.matches('.cancel-button')) {
+    $deleteModal.classList.add('hidden');
+  } else if (event.target.matches('.confirm-button')) {
+    var $targetedLi = targetedEntry(data.editing.id);
+    $targetedLi.remove();
+    deleteEntryFromData(data.editing.id);
+
+    if (data.entries.length === 0) {
+      $noEntriesMessage.classList.remove('hidden');
+    }
+
+    $deleteModal.classList.add('hidden');
+    showPage('entries');
+  }
 }
 
 function showPage(page) {
@@ -204,4 +243,21 @@ function refreshNewEntry() {
   $imgPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
   $newEntry.reset();
   data.editing = null;
+}
+
+function deleteEntryFromData(id) {
+  for (var i = 0; i < data.entries.length; i++) {
+    if (id == data.entries[i].id) {
+      data.entries.splice(i, 1);
+      break;
+    }
+  }
+}
+
+function targetedEntry(id) {
+  for (var i = 0; i < $entriesDisplayed.childNodes.length; i++) {
+    if (id == $entriesDisplayed.childNodes[i].getAttribute('data-entry-id')) {
+      return $entriesDisplayed.childNodes[i];
+    }
+  }
 }
