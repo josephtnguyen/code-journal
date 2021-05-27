@@ -16,6 +16,7 @@ var $navBar = document.querySelector('.nav-bar');
 var $noEntriesMessage = document.querySelector('.entries-none');
 
 var $deleteModal = document.querySelector('.delete-modal-container');
+var $deleteBox = document.querySelector('.delete-box');
 
 $photoUrl.addEventListener('input', handleUrl);
 $imgPreview.addEventListener('error', handleImgError);
@@ -27,7 +28,8 @@ $navBar.addEventListener('click', handleNav);
 
 $entriesDisplayed.addEventListener('click', handleEdit);
 
-$deleteButton.addEventListener('click', handleDelete);
+$deleteButton.addEventListener('click', handleDeleteRequest);
+$deleteBox.addEventListener('click', handleDeleteBox);
 
 showPage(data.view);
 
@@ -144,8 +146,19 @@ function handleEdit(event) {
   $imgPreview.setAttribute('src', $newUrl.value);
 }
 
-function handleDelete(event) {
+function handleDeleteRequest(event) {
+  event.preventDefault();
   $deleteModal.classList.remove('hidden');
+}
+
+function handleDeleteBox(event) {
+  if (!(event.target.matches('button'))) {
+    return;
+  }
+
+  if (event.target.matches('.cancel-button')) {
+    $deleteModal.classList.add('hidden');
+  }
 }
 
 function showPage(page) {
