@@ -45,9 +45,6 @@ $avatarPreview.addEventListener('error', handleImgError);
 $editProfile.addEventListener('submit', handleProfileSave);
 
 
-showPage(data.view);
-
-
 function handlePreview(event) {
   if (event.target.closest('.entry-form')) {
     $entryPreview.setAttribute('src', event.target.value);
@@ -126,8 +123,10 @@ function handleNew(event) {
 }
 
 function handleDOMLoad(event) {
-  if (data.entries.length !== 0) {
-    $noEntriesMessage.classList.add('hidden');
+  if (!(data.profile.username)) {
+    showPage('edit-profile');
+  } else {
+    showPage(data.view);
   }
 
   if (data.editing) {
@@ -217,6 +216,10 @@ function showPage(page) {
     } else {
       $views[i].classList.add('hidden');
     }
+  }
+
+  if (data.entries.length !== 0) {
+    $noEntriesMessage.classList.add('hidden');
   }
 
   if (page === 'profile') {
