@@ -141,6 +141,16 @@ function handleDOMLoad(event) {
     $deleteButton.classList.remove('hidden');
   }
 
+  if (data.view === 'edit-profile') {
+    $avatarPreview.setAttribute('src', data.profile.avatar);
+
+    $avatarUrl.value = data.profile.avatar;
+    $profileUsername.value = data.profile.username;
+    $profileFullName.value = data.profile.fullName;
+    $profileLocation.value = data.profile.location;
+    $profileBio.value = data.profile.bio;
+  }
+
   for (var i = 0; i < data.entries.length; i++) {
     $entriesDisplayed.prepend(journalEntry(data.entries[i]));
   }
