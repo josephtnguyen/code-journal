@@ -136,10 +136,21 @@ button {
   margin: 0;
 }
 
+.profile-detail {
+  font-size: 1rem;
+  margin: 1.5rem 0 .5rem;
+}
+
 .edit-button {
   color: #562B81;
   font-size: 1.5rem;
   cursor: pointer;
+}
+
+.profile-icon {
+  color: #562B81;
+  font-size: 1.5rem;
+  margin-right: .5rem;
 }
 
 .entry-par {
